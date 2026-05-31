@@ -1,0 +1,125 @@
+# docker-compose.yml
+# app + Qdrant + Redis + Langfuse v2
+#
+# Langfuse v2 (не v3!) — не потребує Clickhouse, тільки PostgreSQL
+# UI: http://localhost:3000
+# Default: admin@langfuse.com / password
+
+services:
+
+  # ──────────────────────────────────────────
+  # 1. Наш RAG сервер
+  # ──────────────────────────────────────────
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    environment:
+      - PYTHONUNBUFFERED=1
+    depends_on:
+      qdrant:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-c",
+             "import urllib.request, json; r = urllib.request.urlopen('http://localhost:8000/health'); d = json.loads(r.read()); exit(0 if d.get('status') == 'ok' else 1)"]
+      interval: 10s
+      timeout: 5s
+      start_period: 30s
+      retries: 5
+    restart: unless-stopped
+    networks:
+      - ai-network
+
+  # ──────────────────────────────────────────
+  # 2. Qdrant — векторна БД
+  # ──────────────────────────────────────────
+  qdrant:
+    image: qdrant/qdrant:latest
+    ports:
+      - "6335:6333"
+    volumes:
+      - qdrant_data:/qdrant/storage
+    healthcheck:
+      test: ["CMD-SHELL", "bash -c 'echo > /dev/tcp/localhost/6333'"]
+      interval: 10s
+      timeout: 5s
+      start_period: 20s
+      retries: 5
+    restart: unless-stopped
+    networks:
+      - ai-network
+
+  # ──────────────────────────────────────────
+  # 3. Redis
+  # ──────────────────────────────────────────
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    restart: unless-stopped
+    networks:
+      - ai-network
+
+  # ──────────────────────────────────────────
+  # 4. Langfuse v2 — LLM Observability
+  # ──────────────────────────────────────────
+  # v2 НЕ потребує Clickhouse — тільки PostgreSQL
+  # UI: http://localhost:3000
+  langfuse:
+    image: langfuse/langfuse:2
+    ports:
+      - "3000:3000"
+    environment:
+      - DATABASE_URL=postgresql://langfuse:langfuse@langfuse-db:5432/langfuse
+      - NEXTAUTH_SECRET=mysecret-change-in-production
+      - NEXTAUTH_URL=http://localhost:3000
+      - SALT=mysalt-change-in-production
+      - TELEMETRY_ENABLED=false
+      - LANGFUSE_ENABLE_EXPERIMENTAL_FEATURES=false
+    depends_on:
+      langfuse-db:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - ai-network
+
+  # PostgreSQL для Langfuse
+  langfuse-db:
+    image: postgres:15-alpine
+    environment:
+      - POSTGRES_USER=langfuse
+      - POSTGRES_PASSWORD=langfuse
+      - POSTGRES_DB=langfuse
+    volumes:
+      - langfuse_db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U langfuse"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    restart: unless-stopped
+    networks:
+      - ai-network
+
+volumes:
+  qdrant_data:
+  redis_data:
+  langfuse_db_data:
+
+networks:
+  ai-network:
+    driver: bridge

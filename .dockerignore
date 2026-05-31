@@ -1,0 +1,57 @@
+# .dockerignore — що НЕ копіювати в Docker образ
+#
+# Аналог .gitignore але для Docker.
+# Менше файлів = менший образ = швидша збірка.
+
+# Віртуальне середовище Python (будується всередині Docker)
+.venv/
+venv/
+env/
+
+# Git історія (не потрібна в контейнері)
+.git/
+.gitignore
+
+# Python кеш
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+
+# Pytest кеш і результати тестів
+.pytest_cache/
+.coverage
+htmlcov/
+*.egg-info/
+dist/
+build/
+
+# IDE файли
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# macOS сміття
+.DS_Store
+
+# Документація і README (не потрібні в runtime)
+*.md
+docs/
+
+# Docker файли (не потрібні всередині образу)
+Dockerfile*
+docker-compose*.yml
+
+# Локальні конфіги (secrets не повинні потрапляти в образ!)
+.env
+.env.*
+!.env.example
+
+# Логи
+*.log
+logs/
+
+#Скріншоти
+screenshots/
