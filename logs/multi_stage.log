@@ -1,0 +1,199 @@
+PS I:\Python\AI_Engineering\home13\homework\boilerplate> Measure-Command { docker build -t rag-optimized . | Out-Host }
+[+] Building 91.5s (14/14) FINISHED                        docker:desktop-linux
+ => [internal] load build definition from Dockerfile                       0.0s
+ => => transferring dockerfile: 4.36kB                                     0.0s
+ => [internal] load metadata for docker.io/library/python:3.11-slim        1.7s
+ => [internal] load .dockerignore                                          0.0s
+ => => transferring context: 1.04kB                                        0.0s
+ => [builder 1/5] FROM docker.io/library/python:3.11-slim@sha256:a3ab0b96  7.8s
+ => => resolve docker.io/library/python:3.11-slim@sha256:a3ab0b966bc4e915  0.0s
+ => => sha256:45006ceeeea9e2ca59a046b6f4ac9a212e4b27b3d8d6e7d 250B / 250B  0.2s
+ => => sha256:797d495f2c68eb4664df918d39078ca04612d7ef4 14.37MB / 14.37MB  2.1s
+ => => sha256:8649771fee179d7c2590c94f533aaa5fceb70e36e25 1.29MB / 1.29MB  1.3s
+ => => sha256:5b4d6ff92fc4e14e911b7753c954fac965d48c40f 29.78MB / 29.78MB  5.6s
+ => => extracting sha256:5b4d6ff92fc4e14e911b7753c954fac965d48c40fe107575  1.0s
+ => => extracting sha256:8649771fee179d7c2590c94f533aaa5fceb70e36e25dec83  0.2s
+ => => extracting sha256:797d495f2c68eb4664df918d39078ca04612d7ef47c57b5c  0.8s
+ => => extracting sha256:45006ceeeea9e2ca59a046b6f4ac9a212e4b27b3d8d6e7d3  0.0s
+ => [internal] load build context                                          0.0s
+ => => transferring context: 248B                                          0.0s
+ => [builder 2/5] WORKDIR /app                                             0.3s
+ => [builder 3/5] RUN apt-get update && apt-get install -y --no-install-  31.4s
+ => [builder 4/5] COPY app/requirements.txt .                              0.1s
+ => [builder 5/5] RUN python -m venv /app/.venv     && /app/.venv/bin/pi  17.3s
+ => [runtime 3/6] COPY --from=builder /app/.venv /app/.venv                1.0s
+ => [runtime 4/6] COPY app/ ./app/                                         0.1s
+ => [runtime 5/6] COPY data/ ./data/                                       0.1s
+ => [runtime 6/6] RUN groupadd --system appgroup     && useradd --system  23.1s
+ => exporting to image                                                     7.9s
+ => => exporting layers                                                    4.3s
+ => => exporting manifest sha256:8f9872f6301f1f277cd9a4266cc832540f84da2f  0.0s
+ => => exporting config sha256:7433d264c0bd01baa26f036dd2cb5d49d813bac6ae  0.0s
+ => => exporting attestation manifest sha256:f72da40f8912be13b81330ab0876  0.1s
+ => => exporting manifest list sha256:33abc00847ba6c4c1e964d8e539b3ab1eaf  0.0s
+ => => naming to docker.io/library/rag-optimized:latest                    0.0s
+ => => unpacking to docker.io/library/rag-optimized:latest                 3.4s
+
+
+Days              : 0
+Hours             : 0
+Minutes           : 1
+Seconds           : 31
+Milliseconds      : 813
+Ticks             : 918139718
+TotalDays         : 0,00106266171064815
+TotalHours        : 0,0255038810555556
+TotalMinutes      : 1,53023286333333
+TotalSeconds      : 91,8139718
+TotalMilliseconds : 91813,9718
+
+PS I:\Python\AI_Engineering\home13\homework\boilerplate> docker images | findstr rag
+WARNING: This output is designed for human readability. For machine-readable output, please use --format.
+rag-naive:latest         38b4ca313ce5       1.76GB          446MB
+rag-optimized:latest     33abc00847ba        547MB          124MB
+PS I:\Python\AI_Engineering\home13\homework\boilerplate> Measure-Command { docker build -t rag-optimized . | Out-Host }
+[+] Building 26.3s (15/15) FINISHED                        docker:desktop-linux
+ => [internal] load build definition from Dockerfile                       0.0s
+ => => transferring dockerfile: 4.36kB                                     0.0s
+ => [internal] load metadata for docker.io/library/python:3.11-slim        1.1s
+ => [auth] library/python:pull token for registry-1.docker.io              0.0s
+ => [internal] load .dockerignore                                          0.0s
+ => => transferring context: 1.04kB                                        0.0s
+ => [builder 1/5] FROM docker.io/library/python:3.11-slim@sha256:a3ab0b96  0.0s
+ => => resolve docker.io/library/python:3.11-slim@sha256:a3ab0b966bc4e915  0.0s
+ => [internal] load build context                                          0.0s
+ => => transferring context: 1.25kB                                        0.0s
+ => CACHED [builder 2/5] WORKDIR /app                                      0.0s
+ => CACHED [builder 3/5] RUN apt-get update && apt-get install -y --no-in  0.0s
+ => CACHED [builder 4/5] COPY app/requirements.txt .                       0.0s
+ => CACHED [builder 5/5] RUN python -m venv /app/.venv     && /app/.venv/  0.0s
+ => CACHED [runtime 3/6] COPY --from=builder /app/.venv /app/.venv         0.0s
+ => [runtime 4/6] COPY app/ ./app/                                         0.1s
+ => [runtime 5/6] COPY data/ ./data/                                       0.1s
+ => [runtime 6/6] RUN groupadd --system appgroup     && useradd --system  18.8s
+ => exporting to image                                                     5.9s
+ => => exporting layers                                                    4.0s
+ => => exporting manifest sha256:7930628dda8e866fbdf3254d581a2b1aee226484  0.0s
+ => => exporting config sha256:6b2bb79deee349cb64405465c331eac50e0da25dba  0.0s
+ => => exporting attestation manifest sha256:3c3587bddf5e10545be040c7be82  0.1s
+ => => exporting manifest list sha256:5f8c5653b5e6df7d414486eb98d93b8dbb0  0.0s
+ => => naming to docker.io/library/rag-optimized:latest                    0.0s
+ => => unpacking to docker.io/library/rag-optimized:latest                 1.7s
+
+
+Days              : 0
+Hours             : 0
+Minutes           : 0
+Seconds           : 26
+Milliseconds      : 636
+Ticks             : 266362379
+TotalDays         : 0,000308289790509259
+TotalHours        : 0,00739895497222222
+TotalMinutes      : 0,443937298333333
+TotalSeconds      : 26,6362379
+TotalMilliseconds : 26636,2379
+
+PS I:\Python\AI_Engineering\home13\homework\boilerplate> Measure-Command { docker build -t rag-optimized . | Out-Host }
+[+] Building 29.9s (15/15) FINISHED                        docker:desktop-linux
+ => [internal] load build definition from Dockerfile                       0.0s
+ => => transferring dockerfile: 4.43kB                                     0.0s
+ => [internal] load metadata for docker.io/library/python:3.11-slim        1.1s
+ => [auth] library/python:pull token for registry-1.docker.io              0.0s
+ => [internal] load .dockerignore                                          0.0s
+ => => transferring context: 1.04kB                                        0.0s
+ => [builder 1/5] FROM docker.io/library/python:3.11-slim@sha256:a3ab0b96  0.1s
+ => => resolve docker.io/library/python:3.11-slim@sha256:a3ab0b966bc4e915  0.1s
+ => [internal] load build context                                          0.1s
+ => => transferring context: 248B                                          0.0s
+ => CACHED [builder 2/5] WORKDIR /app                                      0.0s
+ => CACHED [builder 3/5] RUN apt-get update && apt-get install -y --no-in  0.0s
+ => CACHED [builder 4/5] COPY app/requirements.txt .                       0.0s
+ => CACHED [builder 5/5] RUN python -m venv /app/.venv     && /app/.venv/  0.0s
+ => CACHED [runtime 3/6] COPY --from=builder /app/.venv /app/.venv         0.0s
+ => [runtime 4/6] RUN groupadd --system appgroup     && useradd --system  22.1s
+ => [runtime 5/6] COPY --chown=appuser:appgroup app/ ./app/                0.2s
+ => [runtime 6/6] COPY --chown=appuser:appgroup data/ ./data/              0.2s
+ => exporting to image                                                     5.9s
+ => => exporting layers                                                    3.8s
+ => => exporting manifest sha256:da883e74a7d0bd5abffa0f311d4955dffeba6cb3  0.0s
+ => => exporting config sha256:acc09071913a8d7149543a2508fd0a0d96a656539b  0.0s
+ => => exporting attestation manifest sha256:e1c2bd63769998d5dec17adcedb0  0.1s
+ => => exporting manifest list sha256:6d5e0fa3f130674b74ed0b490cddbac1ee1  0.0s
+ => => naming to docker.io/library/rag-optimized:latest                    0.0s
+ => => unpacking to docker.io/library/rag-optimized:latest                 1.8s
+
+
+Days              : 0
+Hours             : 0
+Minutes           : 0
+Seconds           : 30
+Milliseconds      : 386
+Ticks             : 303869984
+TotalDays         : 0,00035170137037037
+TotalHours        : 0,00844083288888889
+TotalMinutes      : 0,506449973333333
+TotalSeconds      : 30,3869984
+TotalMilliseconds : 30386,9984
+
+PS I:\Python\AI_Engineering\home13\homework\boilerplate> Measure-Command { docker build -t rag-optimized . | Out-Host }
+[+] Building 1.8s (14/14) FINISHED                         docker:desktop-linux
+ => [internal] load build definition from Dockerfile                       0.0s
+ => => transferring dockerfile: 4.43kB                                     0.0s
+ => [internal] load metadata for docker.io/library/python:3.11-slim        0.9s
+ => [internal] load .dockerignore                                          0.0s
+ => => transferring context: 1.04kB                                        0.0s
+ => [internal] load build context                                          0.0s
+ => => transferring context: 1.27kB                                        0.0s
+ => [builder 1/5] FROM docker.io/library/python:3.11-slim@sha256:a3ab0b96  0.0s
+ => => resolve docker.io/library/python:3.11-slim@sha256:a3ab0b966bc4e915  0.0s
+ => CACHED [builder 2/5] WORKDIR /app                                      0.0s
+ => CACHED [builder 3/5] RUN apt-get update && apt-get install -y --no-in  0.0s
+ => CACHED [builder 4/5] COPY app/requirements.txt .                       0.0s
+ => CACHED [builder 5/5] RUN python -m venv /app/.venv     && /app/.venv/  0.0s
+ => CACHED [runtime 3/6] COPY --from=builder /app/.venv /app/.venv         0.0s
+ => CACHED [runtime 4/6] RUN groupadd --system appgroup     && useradd --  0.0s
+ => [runtime 5/6] COPY --chown=appuser:appgroup app/ ./app/                0.1s
+ => [runtime 6/6] COPY --chown=appuser:appgroup data/ ./data/              0.1s
+ => exporting to image                                                     0.4s
+ => => exporting layers                                                    0.2s
+ => => exporting manifest sha256:2f81882b17fcb6669cfd394f0b372328a41e1c52  0.0s
+ => => exporting config sha256:c590f2f9dbf54942e18bf9ee0031632d613b6d7e1b  0.0s
+ => => exporting attestation manifest sha256:d5787881c999d3786a2724d3c9b3  0.1s
+ => => exporting manifest list sha256:d96dd612fc845360db89e2047678e703914  0.0s
+ => => naming to docker.io/library/rag-optimized:latest                    0.0s
+ => => unpacking to docker.io/library/rag-optimized:latest                 0.1s
+
+
+Days              : 0
+Hours             : 0
+Minutes           : 0
+Seconds           : 2
+Milliseconds      : 127
+Ticks             : 21279752
+TotalDays         : 2,46293425925926E-05
+TotalHours        : 0,000591104222222222
+TotalMinutes      : 0,0354662533333333
+TotalSeconds      : 2,1279752
+TotalMilliseconds : 2127,9752
+
+PS I:\Python\AI_Engineering\home13\homework\boilerplate> docker run --rm -p 8000:8000 --env-file .env rag-optimized
+INFO:     Started server process [1]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     127.0.0.1:56466 - "GET /health HTTP/1.1" 200 OK
+INFO:     172.17.0.1:40700 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:43974 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:42474 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52524 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55682 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56444 - "GET /health HTTP/1.1" 200 OK
+INFO:     172.17.0.1:43782 - "POST /ask HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49278 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52448 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34008 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52712 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34416 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:44246 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51206 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:35510 - "GET /health HTTP/1.1" 200 OK

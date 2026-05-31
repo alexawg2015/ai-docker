@@ -17,15 +17,23 @@ class RAGService:
         self.embeddings: np.ndarray | None = None
         self.ready = False
 
+        # Визначаємо base_url і auth header залежно від провайдера
+        if settings.ollama_base_url:
+            self._base_url = f"{settings.ollama_base_url}/v1"
+            self._auth_header = "Bearer ollama"   # Ollama не перевіряє токен
+        else:
+            self._base_url = "https://api.openai.com/v1"
+            self._auth_header = f"Bearer {settings.openai_api_key}"
+
     @property
     def docs_count(self) -> int:
         return len(self.docs)
 
     async def _embed(self, texts: list[str]) -> np.ndarray:
-        async with httpx.AsyncClient(timeout=30) as client:
+        async with httpx.AsyncClient(timeout=60) as client:
             r = await client.post(
-                "https://api.openai.com/v1/embeddings",
-                headers={"Authorization": f"Bearer {settings.openai_api_key}"},
+                f"{self._base_url}/embeddings",
+                headers={"Authorization": self._auth_header},
                 json={"model": self.embedder_name, "input": texts},
             )
             r.raise_for_status()
@@ -35,7 +43,11 @@ class RAGService:
         return arr / np.where(norms == 0, 1, norms)
 
     async def load(self):
-        self.docs = [json.loads(line) for line in DATA_PATH.read_text().splitlines() if line.strip()]
+        self.docs = [
+            json.loads(line)
+            for line in DATA_PATH.read_text().splitlines()
+            if line.strip()
+        ]
         texts = [f"{d['question']} {d['answer']}" for d in self.docs]
         self.embeddings = await self._embed(texts)
         self.ready = True
@@ -48,17 +60,19 @@ class RAGService:
 
     async def answer(self, question: str) -> tuple[str, list[dict]]:
         sources = await self._retrieve(question)
-        context = "\n\n".join(f"Q: {s['question']}\nA: {s['answer']}" for s in sources)
+        context = "\n\n".join(
+            f"Q: {s['question']}\nA: {s['answer']}" for s in sources
+        )
         prompt = (
             "Answer the user question using only the context below. "
             "If the answer is not in the context, say you don't know.\n\n"
             f"Context:\n{context}\n\nQuestion: {question}"
         )
 
-        async with httpx.AsyncClient(timeout=30) as client:
+        async with httpx.AsyncClient(timeout=120) as client:
             r = await client.post(
-                "https://api.openai.com/v1/chat/completions",
-                headers={"Authorization": f"Bearer {settings.openai_api_key}"},
+                f"{self._base_url}/chat/completions",
+                headers={"Authorization": self._auth_header},
                 json={
                     "model": self.llm_model,
                     "messages": [{"role": "user", "content": prompt}],

@@ -1,0 +1,632 @@
+PS I:\Python\AI_Engineering\home13\homework\boilerplate> docker compose -f docker-compose.ollama.yml up --build
+[+] up 6/6
+ ✔ Image ollama/ollama:latest Pulled                                                                              379.5s
+#1 [internal] load local bake definitions
+#1 reading from stdin 563B 0.0s done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 4.43kB 0.0s done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/python:3.11-slim
+#3 ...
+
+#4 [auth] library/python:pull token for registry-1.docker.io
+#4 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/python:3.11-slim
+#3 DONE 1.4s
+
+#5 [internal] load .dockerignore
+#5 transferring context: 1.07kB done
+#5 DONE 0.0s
+
+#6 [internal] load build context
+#6 transferring context: 4.06kB 0.0s done
+#6 DONE 0.0s
+
+#7 [builder 1/5] FROM docker.io/library/python:3.11-slim@sha256:a3ab0b966bc4e91546a033e22093cb840908979487a9fc0e6e38295747e49ac0
+#7 resolve docker.io/library/python:3.11-slim@sha256:a3ab0b966bc4e91546a033e22093cb840908979487a9fc0e6e38295747e49ac0 0.0s done
+#7 DONE 0.1s
+
+#8 [builder 4/5] COPY app/requirements.txt .
+#8 CACHED
+
+#9 [runtime 3/6] COPY --from=builder /app/.venv /app/.venv
+#9 CACHED
+
+#10 [builder 3/5] RUN apt-get update && apt-get install -y --no-install-recommends     build-essential     && rm -rf /var/lib/apt/lists/*
+#10 CACHED
+
+#11 [builder 2/5] WORKDIR /app
+#11 CACHED
+
+#12 [builder 5/5] RUN python -m venv /app/.venv     && /app/.venv/bin/pip install --no-cache-dir --upgrade pip     && /app/.venv/bin/pip install --no-cache-dir -r requirements.txt
+#12 CACHED
+
+#13 [runtime 4/6] RUN groupadd --system appgroup     && useradd --system --gid appgroup --no-create-home appuser     && chown -R appuser:appgroup /app
+#13 CACHED
+
+#14 [runtime 5/6] COPY --chown=appuser:appgroup app/ ./app/
+#14 DONE 0.3s
+
+#15 [runtime 6/6] COPY --chown=appuser:appgroup data/ ./data/
+#15 DONE 0.1s
+
+#16 exporting to image
+#16 exporting layers
+#16 exporting layers 0.2s done
+#16 exporting manifest sha256:2e2077db8927553aa8dd48488086eac7aecc742db55f21c73efeb2a5f440011d 0.0s done
+#16 exporting config sha256:867b6abd04e0eab0c407d9ec21f11088434ab08321a184981753e73d876a0c87 0.0s done
+#16 exporting attestation manifest sha256:de4356dd699ace6a3f9a084eab5d3253aa46d528dedbc39a856a5bff5659e3fa 0.1s done
+#16 exporting manifest list sha256:0bb8b83ffbfae6cf1abecc408517ed9eaa8a53de008f059683fb83901e028674
+#16 exporting manifest list sha256:0bb8b83ffbfae6cf1abecc408517ed9eaa8a53de008f059683fb83901e028674 0.0s done
+#16 naming to docker.io/library/boilerplate-app:latest done
+#16 unpacking to docker.io/library/boilerplate-app:latest 0.1s done
+#16 DONE 0.5s
+
+#17 resolving provenance for metadata file
+#17 DONE 0.0s
+time="2026-05-31T14:13:30+03:00" level=warning msg="Found orphan containers ([boilerplate-langfuse-1 boilerplate-langfus[+] up 12/12 this project. If you removed or renamed this service in your compose file, you can run this command with th
+ ✔ Image ollama/ollama:latest       Pulled                                                                        379.5s
+ ✔ Image boilerplate-app            Built                                                                           3.4s
+ ✔ Volume boilerplate_ollama_models Created                                                                         0.0s
+ ✔ Container boilerplate-redis-1    Running                                                                         0.0s
+ ✔ Container boilerplate-ollama-1   Created                                                                         0.2s
+ ✔ Container boilerplate-qdrant-1   Recreated                                                                       0.9s
+ ✔ Container boilerplate-app-1      Recreated                                                                       1.4s
+Attaching to app-1, ollama-1, qdrant-1, redis-1
+ollama-1  | Couldn't find '/root/.ollama/id_ed25519'. Generating new private key.
+
+ollama-1  | Your new public key is:
+ollama-1  |
+ollama-1  | ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHkcZJ+EDgNoI6RORoF551tehMSBZe3q8CvVrpEkYuhD
+ollama-1  |
+ollama-1  | time=2026-05-31T11:13:33.149Z level=INFO source=routes.go:1802 msg="server config" env="map[CUDA_VISIBLE_DEVICES: GGML_VK_VISIBLE_DEVICES: GPU_DEVICE_ORDINAL: HIP_VISIBLE_DEVICES: HSA_OVERRIDE_GFX_VERSION: HTTPS_PROXY: HTTP_PROXY: NO_PROXY: OLLAMA_CONTEXT_LENGTH:0 OLLAMA_DEBUG:INFO OLLAMA_DEBUG_LOG_REQUESTS:false OLLAMA_EDITOR: OLLAMA_FLASH_ATTENTION:false OLLAMA_GPU_OVERHEAD:0 OLLAMA_HOST:http://0.0.0.0:11434 OLLAMA_KEEP_ALIVE:5m0s OLLAMA_KV_CACHE_TYPE: OLLAMA_LLM_LIBRARY: OLLAMA_LOAD_TIMEOUT:5m0s OLLAMA_MAX_LOADED_MODELS:0 OLLAMA_MAX_QUEUE:512 OLLAMA_MAX_TRANSFER_STREAMS:4 OLLAMA_MODELS:/root/.ollama/models OLLAMA_MULTIUSER_CACHE:false OLLAMA_NEW_ENGINE:false OLLAMA_NOHISTORY:false OLLAMA_NOPRUNE:false OLLAMA_NO_CLOUD:false OLLAMA_NUM_PARALLEL:1 OLLAMA_ORIGINS:[http://localhost https://localhost http://localhost:* https://localhost:* http://127.0.0.1 https://127.0.0.1 http://127.0.0.1:* https://127.0.0.1:* http://0.0.0.0 https://0.0.0.0 http://0.0.0.0:* https://0.0.0.0:* app://* file://* tauri://* vscode-webview://* vscode-file://*] OLLAMA_REMOTES:[ollama.com] OLLAMA_SCHED_SPREAD:false OLLAMA_VULKAN:false ROCR_VISIBLE_DEVICES: http_proxy: https_proxy: no_proxy:]"
+
+
+qdrant-1  |            _                 _
+
+
+ollama-1  | time=2026-05-31T11:13:33.149Z level=INFO source=routes.go:1804 msg="Ollama cloud disabled: false"
+qdrant-1  |   __ _  __| |_ __ __ _ _ __ | |_
+
+ollama-1  | time=2026-05-31T11:13:33.151Z level=INFO source=images.go:517 msg="total blobs: 0"
+
+
+qdrant-1  |  / _` |/ _` | '__/ _` | '_ \| __|
+
+
+ollama-1  | time=2026-05-31T11:13:33.151Z level=INFO source=images.go:524 msg="total unused blobs removed: 0"
+
+
+qdrant-1  | | (_| | (_| | | | (_| | | | | |_
+ollama-1  | time=2026-05-31T11:13:33.151Z level=INFO source=routes.go:1864 msg="Listening on [::]:11434 (version 0.24.0)"
+v View in Docker Desktop   o View Config   w Enable Watch   d Detach
+
+qdrant-1  |  \__, |\__,_|_|  \__,_|_| |_|\__|
+ollama-1  | time=2026-05-31T11:13:33.153Z level=INFO source=runner.go:67 msg="discovering available GPUs..."
+
+
+
+
+qdrant-1  |     |_|                           nable Watch   d Detach
+ollama-1  | time=2026-05-31T11:13:33.155Z level=INFO source=server.go:433 msg="starting runner" cmd="/usr/bin/ollama runner --ollama-engine --port 37699"
+
+
+
+
+qdrant-1  |
+
+
+ollama-1  | time=2026-05-31T11:13:33.214Z level=INFO source=server.go:433 msg="starting runner" cmd="/usr/bin/ollama runner --ollama-engine --port 41601"
+
+ollama-1  | time=2026-05-31T11:13:33.307Z level=INFO source=runner.go:106 msg="experimental Vulkan support disabled.  Toqdrant-1  | Access web UI at http://localhost:6333/dashboard
+ollama-1  | time=2026-05-31T11:13:33.308Z level=INFO source=types.go:60 msg="inference compute" id=cpu library=cpu compute="" name=cpu description=cpu libdirs=ollama driver="" pci_id="" type="" total="15.2 GiB" available="15.2 GiB"
+
+
+ollama-1  | time=2026-05-31T11:13:33.308Z level=INFO source=routes.go:1914 msg="vram-based default context" total_vram="0 B" default_num_ctx=4096
+qdrant-1  |
+qdrant-1  | 2026-05-31T11:13:33.199502Z  INFO storage::content_manager::consensus::persistent: Loading raft state from ./storage/raft_state.json
+qdrant-1  | 2026-05-31T11:13:33.219783Z  INFO qdrant: Distributed mode disabled
+qdrant-1  | 2026-05-31T11:13:33.220475Z  INFO qdrant: Telemetry reporting enabled, id: fe84dc81-de97-4ac1-99f0-a7897d050255
+qdrant-1  | 2026-05-31T11:13:33.346224Z  INFO qdrant::actix: REST transport settings: keep_alive=5s, client_request_timeout=5s, client_disconnect_timeout=5s
+qdrant-1  | 2026-05-31T11:13:33.346318Z  INFO qdrant::actix: TLS disabled for REST API
+qdrant-1  | 2026-05-31T11:13:33.346999Z  INFO qdrant::actix: Qdrant HTTP listening on 6333
+qdrant-1  | 2026-05-31T11:13:33.347070Z  INFO actix_server::builder: starting 15 workers
+qdrant-1  | 2026-05-31T11:13:33.347337Z  INFO actix_server::server: Actix runtime found; starting in Actix runtime
+qdrant-1  | 2026-05-31T11:13:33.347403Z  INFO actix_server::server: starting service: "actix-web-service-0.0.0.0:6333", workers: 15, listening on: 0.0.0.0:6333
+qdrant-1  | 2026-05-31T11:13:33.355304Z  INFO qdrant::tonic: Qdrant gRPC listening on 6334
+qdrant-1  | 2026-05-31T11:13:33.355370Z  INFO qdrant::tonic: TLS disabled for gRPC API
+
+ollama-1  | time=2026-05-31T11:13:33.514Z level=INFO source=model_recommendations.go:177 msg="model recommendations cache sleep scheduled" wait=4h6m12.027687897s consecutive_failures=0
+
+
+
+
+ollama-1  | [GIN] 2026/05/31 - 11:13:38 | 200 |      46.621µs |       127.0.0.1 | HEAD     "/"
+ollama-1  | [GIN] 2026/05/31 - 11:13:38 | 200 |      68.934µs |       127.0.0.1 | GET      "/api/tags"
+Container boilerplate-ollama-1 Healthy
+app-1     | INFO:     Started server process [1]
+app-1     | INFO:     Waiting for application startup.
+ollama-1  | [GIN] 2026/05/31 - 11:13:40 | 404 |    1.872223ms |      172.19.0.7 | POST     "/v1/embeddings"
+app-1     | ERROR:    Traceback (most recent call last):
+app-1     |   File "/app/.venv/lib/python3.11/site-packages/starlette/routing.py", line 693, in lifespan
+app-1     |     async with self.lifespan_context(app) as maybe_state:
+app-1     |   File "/usr/local/lib/python3.11/contextlib.py", line 210, in __aenter__
+app-1     |     return await anext(self.gen)
+app-1     |            ^^^^^^^^^^^^^^^^^^^^^
+app-1     |   File "/app/app/main.py", line 13, in lifespan
+app-1     |     await rag.load()
+app-1     |   File "/app/app/rag.py", line 52, in load
+app-1     |     self.embeddings = await self._embed(texts)
+app-1     |                       ^^^^^^^^^^^^^^^^^^^^^^^^
+app-1     |   File "/app/app/rag.py", line 39, in _embed
+app-1     |     r.raise_for_status()
+app-1     |   File "/app/.venv/lib/python3.11/site-packages/httpx/_models.py", line 829, in raise_for_status
+app-1     |     raise HTTPStatusError(message, request=request, response=self)
+app-1     | httpx.HTTPStatusError: Client error '404 Not Found' for url 'http://ollama:11434/v1/embeddings'
+app-1     | For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+app-1     |
+app-1     | ERROR:    Application startup failed. Exiting.
+app-1 exited with code 3 (restarting)
+app-1     | INFO:     Started server process [1]
+app-1     | INFO:     Waiting for application startup.
+ollama-1  | [GIN] 2026/05/31 - 11:13:42 | 404 |     394.369µs |      172.19.0.7 | POST     "/v1/embeddings"
+app-1     | ERROR:    Traceback (most recent call last):
+app-1     |   File "/app/.venv/lib/python3.11/site-packages/starlette/routing.py", line 693, in lifespan
+app-1     |     async with self.lifespan_context(app) as maybe_state:
+app-1     |   File "/usr/local/lib/python3.11/contextlib.py", line 210, in __aenter__
+app-1     |     return await anext(self.gen)
+app-1     |            ^^^^^^^^^^^^^^^^^^^^^
+app-1     |   File "/app/app/main.py", line 13, in lifespan
+app-1     |     await rag.load()
+app-1     |   File "/app/app/rag.py", line 52, in load
+app-1     |     self.embeddings = await self._embed(texts)
+app-1     |                       ^^^^^^^^^^^^^^^^^^^^^^^^
+app-1     |   File "/app/app/rag.py", line 39, in _embed
+app-1     |     r.raise_for_status()
+app-1     |   File "/app/.venv/lib/python3.11/site-packages/httpx/_models.py", line 829, in raise_for_status
+app-1     |     raise HTTPStatusError(message, request=request, response=self)
+app-1     | httpx.HTTPStatusError: Client error '404 Not Found' for url 'http://ollama:11434/v1/embeddings'
+app-1     | For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+app-1     |
+app-1     | ERROR:    Application startup failed. Exiting.
+app-1 exited with code 3 (restarting)
+app-1     | INFO:     Started server process [1]
+app-1     | INFO:     Waiting for application startup.
+app-1     | ERROR:    Traceback (most recent call last):
+ollama-1  | [GIN] 2026/05/31 - 11:13:44 | 404 |     344.933µs |      172.19.0.7 | POST     "/v1/embeddings"
+app-1     |   File "/app/.venv/lib/python3.11/site-packages/starlette/routing.py", line 693, in lifespan
+app-1     |     async with self.lifespan_context(app) as maybe_state:
+app-1     |   File "/usr/local/lib/python3.11/contextlib.py", line 210, in __aenter__
+app-1     |     return await anext(self.gen)
+app-1     |            ^^^^^^^^^^^^^^^^^^^^^
+app-1     |   File "/app/app/main.py", line 13, in lifespan
+app-1     |     await rag.load()
+app-1     |   File "/app/app/rag.py", line 52, in load
+app-1     |     self.embeddings = await self._embed(texts)
+app-1     |                       ^^^^^^^^^^^^^^^^^^^^^^^^
+app-1     |   File "/app/app/rag.py", line 39, in _embed
+app-1     |     r.raise_for_status()
+app-1     |   File "/app/.venv/lib/python3.11/site-packages/httpx/_models.py", line 829, in raise_for_status
+app-1     |     raise HTTPStatusError(message, request=request, response=self)
+app-1     | httpx.HTTPStatusError: Client error '404 Not Found' for url 'http://ollama:11434/v1/embeddings'
+app-1     | For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+app-1     |
+app-1     | ERROR:    Application startup failed. Exiting.
+app-1 exited with code 3 (restarting)
+app-1     | INFO:     Started server process [1]
+app-1     | INFO:     Waiting for application startup.
+app-1     | ERROR:    Traceback (most recent call last):
+app-1     |   File "/app/.venv/lib/python3.11/site-packages/starlette/routing.py", line 693, in lifespan
+app-1     |     async with self.lifespan_context(app) as maybe_state:
+app-1     |   File "/usr/local/lib/python3.11/contextlib.py", line 210, in __aenter__
+app-1     |     return await anext(self.gen)
+app-1     |            ^^^^^^^^^^^^^^^^^^^^^
+app-1     |   File "/app/app/main.py", line 13, in lifespan
+app-1     |     await rag.load()
+app-1     |   File "/app/app/rag.py", line 52, in load
+app-1     |     self.embeddings = await self._embed(texts)
+app-1     |                       ^^^^^^^^^^^^^^^^^^^^^^^^
+app-1     |   File "/app/app/rag.py", line 39, in _embed
+app-1     |     r.raise_for_status()
+app-1     |   File "/app/.venv/lib/python3.11/site-packages/httpx/_models.py", line 829, in raise_for_status
+app-1     |     raise HTTPStatusError(message, request=request, response=self)
+app-1     | httpx.HTTPStatusError: Client error '404 Not Found' for url 'http://ollama:11434/v1/embeddings'
+app-1     | For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+app-1     |
+app-1     | ERROR:    Application startup failed. Exiting.
+ollama-1  | [GIN] 2026/05/31 - 11:13:46 | 404 |     344.451µs |      172.19.0.7 | POST     "/v1/embeddings"
+app-1 exited with code 3 (restarting)
+ollama-1  | [GIN] 2026/05/31 - 11:13:48 | 200 |      28.305µs |       127.0.0.1 | HEAD     "/"
+ollama-1  | [GIN] 2026/05/31 - 11:13:48 | 200 |      51.882µs |       127.0.0.1 | GET      "/api/tags"
+app-1     | INFO:     Started server process [1]
+app-1     | INFO:     Waiting for application startup.
+ollama-1  | [GIN] 2026/05/31 - 11:13:48 | 404 |     349.181µs |      172.19.0.7 | POST     "/v1/embeddings"
+app-1     | ERROR:    Traceback (most recent call last):
+app-1     |   File "/app/.venv/lib/python3.11/site-packages/starlette/routing.py", line 693, in lifespan
+app-1     |     async with self.lifespan_context(app) as maybe_state:
+app-1     |   File "/usr/local/lib/python3.11/contextlib.py", line 210, in __aenter__
+app-1     |     return await anext(self.gen)
+app-1     |            ^^^^^^^^^^^^^^^^^^^^^
+app-1     |   File "/app/app/main.py", line 13, in lifespan
+app-1     |     await rag.load()
+app-1     |   File "/app/app/rag.py", line 52, in load
+app-1     |     self.embeddings = await self._embed(texts)
+app-1     |                       ^^^^^^^^^^^^^^^^^^^^^^^^
+app-1     |   File "/app/app/rag.py", line 39, in _embed
+app-1     |     r.raise_for_status()
+app-1     |   File "/app/.venv/lib/python3.11/site-packages/httpx/_models.py", line 829, in raise_for_status
+app-1     |     raise HTTPStatusError(message, request=request, response=self)
+app-1     | httpx.HTTPStatusError: Client error '404 Not Found' for url 'http://ollama:11434/v1/embeddings'
+app-1     | For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+app-1     |
+app-1     | ERROR:    Application startup failed. Exiting.
+app-1 exited with code 3 (restarting)
+app-1     | INFO:     Started server process [1]
+app-1     | INFO:     Waiting for application startup.
+ollama-1  | [GIN] 2026/05/31 - 11:13:51 | 404 |     327.097µs |      172.19.0.7 | POST     "/v1/embeddings"
+app-1     | ERROR:    Traceback (most recent call last):
+app-1     |   File "/app/.venv/lib/python3.11/site-packages/starlette/routing.py", line 693, in lifespan
+app-1     |     async with self.lifespan_context(app) as maybe_state:
+app-1     |   File "/usr/local/lib/python3.11/contextlib.py", line 210, in __aenter__
+app-1     |     return await anext(self.gen)
+app-1     |            ^^^^^^^^^^^^^^^^^^^^^
+app-1     |   File "/app/app/main.py", line 13, in lifespan
+app-1     |     await rag.load()
+app-1     |   File "/app/app/rag.py", line 52, in load
+app-1     |     self.embeddings = await self._embed(texts)
+app-1     |                       ^^^^^^^^^^^^^^^^^^^^^^^^
+app-1     |   File "/app/app/rag.py", line 39, in _embed
+app-1     |     r.raise_for_status()
+app-1     |   File "/app/.venv/lib/python3.11/site-packages/httpx/_models.py", line 829, in raise_for_status
+app-1     |     raise HTTPStatusError(message, request=request, response=self)
+app-1     | httpx.HTTPStatusError: Client error '404 Not Found' for url 'http://ollama:11434/v1/embeddings'
+app-1     | For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+app-1     |
+app-1     | ERROR:    Application startup failed. Exiting.
+app-1 exited with code 3 (restarting)
+app-1     | INFO:     Started server process [1]
+app-1     | INFO:     Waiting for application startup.
+ollama-1  | [GIN] 2026/05/31 - 11:13:56 | 404 |     633.335µs |      172.19.0.7 | POST     "/v1/embeddings"
+app-1     | ERROR:    Traceback (most recent call last):
+app-1     |   File "/app/.venv/lib/python3.11/site-packages/starlette/routing.py", line 693, in lifespan
+app-1     |     async with self.lifespan_context(app) as maybe_state:
+app-1     |   File "/usr/local/lib/python3.11/contextlib.py", line 210, in __aenter__
+app-1     |     return await anext(self.gen)
+app-1     |            ^^^^^^^^^^^^^^^^^^^^^
+app-1     |   File "/app/app/main.py", line 13, in lifespan
+app-1     |     await rag.load()
+app-1     |   File "/app/app/rag.py", line 52, in load
+app-1     |     self.embeddings = await self._embed(texts)
+app-1     |                       ^^^^^^^^^^^^^^^^^^^^^^^^
+app-1     |   File "/app/app/rag.py", line 39, in _embed
+app-1     |     r.raise_for_status()
+app-1     |   File "/app/.venv/lib/python3.11/site-packages/httpx/_models.py", line 829, in raise_for_status
+app-1     |     raise HTTPStatusError(message, request=request, response=self)
+app-1     | httpx.HTTPStatusError: Client error '404 Not Found' for url 'http://ollama:11434/v1/embeddings'
+app-1     | For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+app-1     |
+app-1     | ERROR:    Application startup failed. Exiting.
+app-1 exited with code 3 (restarting)
+ollama-1  | [GIN] 2026/05/31 - 11:13:58 | 200 |      29.207µs |       127.0.0.1 | HEAD     "/"
+ollama-1  | [GIN] 2026/05/31 - 11:13:58 | 200 |      60.348µs |       127.0.0.1 | GET      "/api/tags"
+app-1     | INFO:     Started server process [1]
+app-1     | INFO:     Waiting for application startup.
+ollama-1  | [GIN] 2026/05/31 - 11:14:03 | 404 |     388.918µs |      172.19.0.7 | POST     "/v1/embeddings"
+app-1     | ERROR:    Traceback (most recent call last):
+app-1     |   File "/app/.venv/lib/python3.11/site-packages/starlette/routing.py", line 693, in lifespan
+app-1     |     async with self.lifespan_context(app) as maybe_state:
+app-1     |   File "/usr/local/lib/python3.11/contextlib.py", line 210, in __aenter__
+app-1     |     return await anext(self.gen)
+app-1     |            ^^^^^^^^^^^^^^^^^^^^^
+app-1     |   File "/app/app/main.py", line 13, in lifespan
+app-1     |     await rag.load()
+app-1     |   File "/app/app/rag.py", line 52, in load
+app-1     |     self.embeddings = await self._embed(texts)
+app-1     |                       ^^^^^^^^^^^^^^^^^^^^^^^^
+app-1     |   File "/app/app/rag.py", line 39, in _embed
+app-1     |     r.raise_for_status()
+app-1     |   File "/app/.venv/lib/python3.11/site-packages/httpx/_models.py", line 829, in raise_for_status
+app-1     |     raise HTTPStatusError(message, request=request, response=self)
+app-1     | httpx.HTTPStatusError: Client error '404 Not Found' for url 'http://ollama:11434/v1/embeddings'
+app-1     | For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+app-1     |
+app-1     | ERROR:    Application startup failed. Exiting.
+app-1 exited with code 3 (restarting)
+ollama-1  | [GIN] 2026/05/31 - 11:14:08 | 200 |      29.467µs |       127.0.0.1 | HEAD     "/"
+ollama-1  | [GIN] 2026/05/31 - 11:14:08 | 200 |      60.748µs |       127.0.0.1 | GET      "/api/tags"
+app-1     | INFO:     Started server process [1]
+app-1     | INFO:     Waiting for application startup.
+app-1     | ERROR:    Traceback (most recent call last):
+app-1     |   File "/app/.venv/lib/python3.11/site-packages/starlette/routing.py", line 693, in lifespan
+app-1     |     async with self.lifespan_context(app) as maybe_state:
+app-1     |   File "/usr/local/lib/python3.11/contextlib.py", line 210, in __aenter__
+app-1     |     return await anext(self.gen)
+app-1     |            ^^^^^^^^^^^^^^^^^^^^^
+app-1     |   File "/app/app/main.py", line 13, in lifespan
+app-1     |     await rag.load()
+app-1     |   File "/app/app/rag.py", line 52, in load
+app-1     |     self.embeddings = await self._embed(texts)
+app-1     |                       ^^^^^^^^^^^^^^^^^^^^^^^^
+app-1     |   File "/app/app/rag.py", line 39, in _embed
+app-1     |     r.raise_for_status()
+app-1     |   File "/app/.venv/lib/python3.11/site-packages/httpx/_models.py", line 829, in raise_for_status
+app-1     |     raise HTTPStatusError(message, request=request, response=self)
+app-1     | httpx.HTTPStatusError: Client error '404 Not Found' for url 'http://ollama:11434/v1/embeddings'
+app-1     | For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+app-1     |
+app-1     | ERROR:    Application startup failed. Exiting.
+ollama-1  | [GIN] 2026/05/31 - 11:14:17 | 404 |     618.938µs |      172.19.0.7 | POST     "/v1/embeddings"
+app-1 exited with code 3 (restarting)
+ollama-1  | [GIN] 2026/05/31 - 11:14:18 | 200 |      29.377µs |       127.0.0.1 | HEAD     "/"
+ollama-1  | [GIN] 2026/05/31 - 11:14:18 | 200 |      57.442µs |       127.0.0.1 | GET      "/api/tags"
+ollama-1  | [GIN] 2026/05/31 - 11:14:28 | 200 |      25.169µs |       127.0.0.1 | HEAD     "/"
+ollama-1  | [GIN] 2026/05/31 - 11:14:28 | 200 |     147.016µs |       127.0.0.1 | GET      "/api/tags"
+ollama-1  | [GIN] 2026/05/31 - 11:14:38 | 200 |      48.715µs |       127.0.0.1 | HEAD     "/"
+ollama-1  | [GIN] 2026/05/31 - 11:14:38 | 200 |      53.435µs |       127.0.0.1 | GET      "/api/tags"
+app-1     | INFO:     Started server process [1]
+app-1     | INFO:     Waiting for application startup.
+ollama-1  | [GIN] 2026/05/31 - 11:14:44 | 404 |     340.194µs |      172.19.0.7 | POST     "/v1/embeddings"
+app-1     | ERROR:    Traceback (most recent call last):
+app-1     |   File "/app/.venv/lib/python3.11/site-packages/starlette/routing.py", line 693, in lifespan
+app-1     |     async with self.lifespan_context(app) as maybe_state:
+app-1     |   File "/usr/local/lib/python3.11/contextlib.py", line 210, in __aenter__
+app-1     |     return await anext(self.gen)
+app-1     |            ^^^^^^^^^^^^^^^^^^^^^
+app-1     |   File "/app/app/main.py", line 13, in lifespan
+app-1     |     await rag.load()
+app-1     |   File "/app/app/rag.py", line 52, in load
+app-1     |     self.embeddings = await self._embed(texts)
+app-1     |                       ^^^^^^^^^^^^^^^^^^^^^^^^
+app-1     |   File "/app/app/rag.py", line 39, in _embed
+app-1     |     r.raise_for_status()
+app-1     |   File "/app/.venv/lib/python3.11/site-packages/httpx/_models.py", line 829, in raise_for_status
+app-1     |     raise HTTPStatusError(message, request=request, response=self)
+app-1     | httpx.HTTPStatusError: Client error '404 Not Found' for url 'http://ollama:11434/v1/embeddings'
+app-1     | For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+app-1     |
+app-1     | ERROR:    Application startup failed. Exiting.
+app-1 exited with code 3 (restarting)
+ollama-1  | [GIN] 2026/05/31 - 11:14:48 | 200 |      29.076µs |       127.0.0.1 | HEAD     "/"
+ollama-1  | [GIN] 2026/05/31 - 11:14:48 | 200 |        66.5µs |       127.0.0.1 | GET      "/api/tags"
+ollama-1  | [GIN] 2026/05/31 - 11:14:58 | 200 |      28.816µs |       127.0.0.1 | HEAD     "/"
+ollama-1  | [GIN] 2026/05/31 - 11:14:58 | 200 |      67.121µs |       127.0.0.1 | GET      "/api/tags"
+ollama-1  | [GIN] 2026/05/31 - 11:15:09 | 200 |      23.375µs |       127.0.0.1 | HEAD     "/"
+ollama-1  | [GIN] 2026/05/31 - 11:15:09 | 200 |      68.163µs |       127.0.0.1 | GET      "/api/tags"
+ollama-1  | [GIN] 2026/05/31 - 11:15:19 | 200 |      26.973µs |       127.0.0.1 | HEAD     "/"
+ollama-1  | [GIN] 2026/05/31 - 11:15:19 | 200 |      69.786µs |       127.0.0.1 | GET      "/api/tags"
+ollama-1  | [GIN] 2026/05/31 - 11:15:29 | 200 |      37.503µs |       127.0.0.1 | HEAD     "/"
+ollama-1  | [GIN] 2026/05/31 - 11:15:29 | 200 |     133.901µs |       127.0.0.1 | GET      "/api/tags"
+app-1     | INFO:     Started server process [1]
+app-1     | INFO:     Waiting for application startup.
+app-1     | ERROR:    Traceback (most recent call last):
+ollama-1  | [GIN] 2026/05/31 - 11:15:37 | 404 |     333.961µs |      172.19.0.7 | POST     "/v1/embeddings"
+app-1     |   File "/app/.venv/lib/python3.11/site-packages/starlette/routing.py", line 693, in lifespan
+app-1     |     async with self.lifespan_context(app) as maybe_state:
+app-1     |   File "/usr/local/lib/python3.11/contextlib.py", line 210, in __aenter__
+app-1     |     return await anext(self.gen)
+app-1     |            ^^^^^^^^^^^^^^^^^^^^^
+app-1     |   File "/app/app/main.py", line 13, in lifespan
+app-1     |     await rag.load()
+app-1     |   File "/app/app/rag.py", line 52, in load
+app-1     |     self.embeddings = await self._embed(texts)
+app-1     |                       ^^^^^^^^^^^^^^^^^^^^^^^^
+app-1     |   File "/app/app/rag.py", line 39, in _embed
+app-1     |     r.raise_for_status()
+app-1     |   File "/app/.venv/lib/python3.11/site-packages/httpx/_models.py", line 829, in raise_for_status
+app-1     |     raise HTTPStatusError(message, request=request, response=self)
+app-1     | httpx.HTTPStatusError: Client error '404 Not Found' for url 'http://ollama:11434/v1/embeddings'
+app-1     | For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+app-1     |
+app-1     | ERROR:    Application startup failed. Exiting.
+app-1 exited with code 3 (restarting)
+ollama-1  | [GIN] 2026/05/31 - 11:15:39 | 200 |      29.077µs |       127.0.0.1 | HEAD     "/"
+ollama-1  | [GIN] 2026/05/31 - 11:15:39 | 200 |      62.181µs |       127.0.0.1 | GET      "/api/tags"
+ollama-1  | [GIN] 2026/05/31 - 11:15:49 | 200 |      28.756µs |       127.0.0.1 | HEAD     "/"
+ollama-1  | [GIN] 2026/05/31 - 11:15:49 | 200 |     112.409µs |       127.0.0.1 | GET      "/api/tags"
+ollama-1  | [GIN] 2026/05/31 - 11:15:59 | 200 |      29.308µs |       127.0.0.1 | HEAD     "/"
+ollama-1  | [GIN] 2026/05/31 - 11:15:59 | 200 |     121.597µs |       127.0.0.1 | GET      "/api/tags"
+ollama-1  | [GIN] 2026/05/31 - 11:16:09 | 200 |      72.281µs |       127.0.0.1 | HEAD     "/"
+ollama-1  | [GIN] 2026/05/31 - 11:16:09 | 200 |     172.877µs |       127.0.0.1 | GET      "/api/tags"
+ollama-1  | [GIN] 2026/05/31 - 11:16:19 | 200 |      29.688µs |       127.0.0.1 | HEAD     "/"
+ollama-1  | [GIN] 2026/05/31 - 11:16:19 | 200 |      64.626µs |       127.0.0.1 | GET      "/api/tags"
+ollama-1  | [GIN] 2026/05/31 - 11:16:29 | 200 |      35.078µs |       127.0.0.1 | HEAD     "/"
+ollama-1  | [GIN] 2026/05/31 - 11:16:29 | 200 |      86.438µs |       127.0.0.1 | GET      "/api/tags"
+app-1     | INFO:     Started server process [1]
+app-1     | INFO:     Waiting for application startup.
+app-1     | ERROR:    Traceback (most recent call last):
+app-1     |   File "/app/.venv/lib/python3.11/site-packages/starlette/routing.py", line 693, in lifespan
+app-1     |     async with self.lifespan_context(app) as maybe_state:
+app-1     |   File "/usr/local/lib/python3.11/contextlib.py", line 210, in __aenter__
+app-1     |     return await anext(self.gen)
+app-1     |            ^^^^^^^^^^^^^^^^^^^^^
+app-1     |   File "/app/app/main.py", line 13, in lifespan
+app-1     |     await rag.load()
+app-1     |   File "/app/app/rag.py", line 52, in load
+app-1     |     self.embeddings = await self._embed(texts)
+app-1     |                       ^^^^^^^^^^^^^^^^^^^^^^^^
+app-1     |   File "/app/app/rag.py", line 39, in _embed
+app-1     |     r.raise_for_status()
+app-1     |   File "/app/.venv/lib/python3.11/site-packages/httpx/_models.py", line 829, in raise_for_status
+app-1     |     raise HTTPStatusError(message, request=request, response=self)
+app-1     | httpx.HTTPStatusError: Client error '404 Not Found' for url 'http://ollama:11434/v1/embeddings'
+app-1     | For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+app-1     |
+app-1     | ERROR:    Application startup failed. Exiting.
+ollama-1  | [GIN] 2026/05/31 - 11:16:38 | 404 |     714.913µs |      172.19.0.7 | POST     "/v1/embeddings"
+app-1 exited with code 3 (restarting)
+ollama-1  | [GIN] 2026/05/31 - 11:16:39 | 200 |      27.484µs |       127.0.0.1 | HEAD     "/"
+ollama-1  | [GIN] 2026/05/31 - 11:16:39 | 200 |       56.61µs |       127.0.0.1 | GET      "/api/tags"
+ollama-1  | [GIN] 2026/05/31 - 11:16:49 | 200 |      30.299µs |       127.0.0.1 | HEAD     "/"
+ollama-1  | [GIN] 2026/05/31 - 11:16:49 | 200 |      80.097µs |       127.0.0.1 | GET      "/api/tags"
+ollama-1  | [GIN] 2026/05/31 - 11:17:00 | 200 |      30.218µs |       127.0.0.1 | HEAD     "/"
+ollama-1  | [GIN] 2026/05/31 - 11:17:00 | 200 |      65.106µs |       127.0.0.1 | GET      "/api/tags"
+ollama-1  | [GIN] 2026/05/31 - 11:17:10 | 200 |      25.018µs |       127.0.0.1 | HEAD     "/"
+ollama-1  | [GIN] 2026/05/31 - 11:17:10 | 200 |      60.708µs |       127.0.0.1 | GET      "/api/tags"
+ollama-1  | [GIN] 2026/05/31 - 11:17:20 | 200 |       61.49µs |       127.0.0.1 | HEAD     "/"
+ollama-1  | [GIN] 2026/05/31 - 11:17:20 | 200 |       66.65µs |       127.0.0.1 | GET      "/api/tags"
+ollama-1  | [GIN] 2026/05/31 - 11:17:30 | 200 |      34.177µs |       127.0.0.1 | HEAD     "/"
+ollama-1  | [GIN] 2026/05/31 - 11:17:30 | 200 |      64.286µs |       127.0.0.1 | GET      "/api/tags"
+app-1     | INFO:     Started server process [1]
+app-1     | INFO:     Waiting for application startup.
+ollama-1  | [GIN] 2026/05/31 - 11:17:39 | 404 |     500.105µs |      172.19.0.7 | POST     "/v1/embeddings"
+app-1     | ERROR:    Traceback (most recent call last):
+app-1     |   File "/app/.venv/lib/python3.11/site-packages/starlette/routing.py", line 693, in lifespan
+app-1     |     async with self.lifespan_context(app) as maybe_state:
+app-1     |   File "/usr/local/lib/python3.11/contextlib.py", line 210, in __aenter__
+app-1     |     return await anext(self.gen)
+app-1     |            ^^^^^^^^^^^^^^^^^^^^^
+app-1     |   File "/app/app/main.py", line 13, in lifespan
+app-1     |     await rag.load()
+app-1     |   File "/app/app/rag.py", line 52, in load
+app-1     |     self.embeddings = await self._embed(texts)
+app-1     |                       ^^^^^^^^^^^^^^^^^^^^^^^^
+app-1     |   File "/app/app/rag.py", line 39, in _embed
+app-1     |     r.raise_for_status()
+app-1     |   File "/app/.venv/lib/python3.11/site-packages/httpx/_models.py", line 829, in raise_for_status
+app-1     |     raise HTTPStatusError(message, request=request, response=self)
+app-1     | httpx.HTTPStatusError: Client error '404 Not Found' for url 'http://ollama:11434/v1/embeddings'
+app-1     | For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+app-1     |
+app-1     | ERROR:    Application startup failed. Exiting.
+app-1 exited with code 3 (restarting)
+ollama-1  | [GIN] 2026/05/31 - 11:17:40 | 200 |      29.878µs |       127.0.0.1 | HEAD     "/"
+ollama-1  | [GIN] 2026/05/31 - 11:17:40 | 200 |       51.38µs |       127.0.0.1 | GET      "/api/tags"
+ollama-1  | [GIN] 2026/05/31 - 11:17:50 | 200 |      62.883µs |       127.0.0.1 | HEAD     "/"
+ollama-1  | [GIN] 2026/05/31 - 11:17:50 | 200 |      84.545µs |       127.0.0.1 | GET      "/api/tags"
+ollama-1  | [GIN] 2026/05/31 - 11:18:00 | 200 |      24.849µs |       127.0.0.1 | HEAD     "/"
+ollama-1  | [GIN] 2026/05/31 - 11:18:00 | 200 |      80.807µs |       127.0.0.1 | GET      "/api/tags"
+ollama-1  | [GIN] 2026/05/31 - 11:18:10 | 200 |       25.82µs |       127.0.0.1 | HEAD     "/"
+ollama-1  | [GIN] 2026/05/31 - 11:18:10 | 200 |      60.938µs |       127.0.0.1 | GET      "/api/tags"
+ollama-1  | [GIN] 2026/05/31 - 11:18:20 | 200 |      38.656µs |       127.0.0.1 | HEAD     "/"
+ollama-1  | [GIN] 2026/05/31 - 11:18:20 | 200 |      84.224µs |       127.0.0.1 | GET      "/api/tags"
+ollama-1  | [GIN] 2026/05/31 - 11:18:30 | 200 |      27.584µs |       127.0.0.1 | HEAD     "/"
+ollama-1  | [GIN] 2026/05/31 - 11:18:30 | 200 |      91.578µs |       127.0.0.1 | GET      "/api/tags"
+app-1     | INFO:     Started server process [1]
+app-1     | INFO:     Waiting for application startup.
+ollama-1  | [GIN] 2026/05/31 - 11:18:41 | 200 |       26.06µs |       127.0.0.1 | HEAD     "/"
+app-1     | ERROR:    Traceback (most recent call last):
+app-1     |   File "/app/.venv/lib/python3.11/site-packages/starlette/routing.py", line 693, in lifespan
+app-1     |     async with self.lifespan_context(app) as maybe_state:
+app-1     |   File "/usr/local/lib/python3.11/contextlib.py", line 210, in __aenter__
+app-1     |     return await anext(self.gen)
+app-1     |            ^^^^^^^^^^^^^^^^^^^^^
+app-1     |   File "/app/app/main.py", line 13, in lifespan
+app-1     |     await rag.load()
+app-1     |   File "/app/app/rag.py", line 52, in load
+app-1     |     self.embeddings = await self._embed(texts)
+app-1     |                       ^^^^^^^^^^^^^^^^^^^^^^^^
+app-1     |   File "/app/app/rag.py", line 39, in _embed
+app-1     |     r.raise_for_status()
+app-1     |   File "/app/.venv/lib/python3.11/site-packages/httpx/_models.py", line 829, in raise_for_status
+app-1     |     raise HTTPStatusError(message, request=request, response=self)
+app-1     | httpx.HTTPStatusError: Client error '404 Not Found' for url 'http://ollama:11434/v1/embeddings'
+app-1     | For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+app-1     |
+ollama-1  | [GIN] 2026/05/31 - 11:18:41 | 200 |      70.758µs |       127.0.0.1 | GET      "/api/tags"
+ollama-1  | [GIN] 2026/05/31 - 11:18:41 | 404 |     493.006µs |      172.19.0.7 | POST     "/v1/embeddings"
+app-1 exited with code 3 (restarting)
+ollama-1  | [GIN] 2026/05/31 - 11:18:51 | 200 |      28.085µs |       127.0.0.1 | HEAD     "/"
+ollama-1  | [GIN] 2026/05/31 - 11:18:51 | 200 |      47.343µs |       127.0.0.1 | GET      "/api/tags"
+ollama-1  | [GIN] 2026/05/31 - 11:18:54 | 200 |       30.46µs |       127.0.0.1 | HEAD     "/"
+ollama-1  | time=2026-05-31T11:18:55.333Z level=INFO source=download.go:179 msg="downloading 970aa74c0a90 in 3 100 MB part(s)"
+ollama-1  | [GIN] 2026/05/31 - 11:19:01 | 200 |      26.391µs |       127.0.0.1 | HEAD     "/"
+ollama-1  | [GIN] 2026/05/31 - 11:19:01 | 200 |      59.425µs |       127.0.0.1 | GET      "/api/tags"
+ollama-1  | [GIN] 2026/05/31 - 11:19:11 | 200 |       50.96µs |       127.0.0.1 | HEAD     "/"
+ollama-1  | [GIN] 2026/05/31 - 11:19:11 | 200 |      62.432µs |       127.0.0.1 | GET      "/api/tags"
+ollama-1  | [GIN] 2026/05/31 - 11:19:21 | 200 |      28.074µs |       127.0.0.1 | HEAD     "/"
+ollama-1  | [GIN] 2026/05/31 - 11:19:21 | 200 |      72.681µs |       127.0.0.1 | GET      "/api/tags"
+ollama-1  | time=2026-05-31T11:19:21.755Z level=INFO source=download.go:179 msg="downloading c71d239df917 in 1 11 KB part(s)"
+ollama-1  | time=2026-05-31T11:19:23.187Z level=INFO source=download.go:179 msg="downloading ce4a164fc046 in 1 17 B part(s)"
+ollama-1  | time=2026-05-31T11:19:24.627Z level=INFO source=download.go:179 msg="downloading 31df23ea7daa in 1 420 B part(s)"
+ollama-1  | [GIN] 2026/05/31 - 11:19:25 | 200 | 31.678006363s |       127.0.0.1 | POST     "/api/pull"
+ollama-1  | [GIN] 2026/05/31 - 11:19:31 | 200 |      26.221µs |       127.0.0.1 | HEAD     "/"
+ollama-1  | [GIN] 2026/05/31 - 11:19:31 | 200 |     562.697µs |       127.0.0.1 | GET      "/api/tags"
+ollama-1  | [GIN] 2026/05/31 - 11:19:35 | 200 |      23.616µs |       127.0.0.1 | HEAD     "/"
+ollama-1  | time=2026-05-31T11:19:36.054Z level=INFO source=download.go:179 msg="downloading dde5aa3fc5ff in 16 126 MB part(s)"
+ollama-1  | [GIN] 2026/05/31 - 11:19:41 | 200 |      29.678µs |       127.0.0.1 | HEAD     "/"
+ollama-1  | [GIN] 2026/05/31 - 11:19:41 | 200 |     726.772µs |       127.0.0.1 | GET      "/api/tags"
+app-1     | INFO:     Started server process [1]
+app-1     | INFO:     Waiting for application startup.
+ollama-1  | time=2026-05-31T11:19:42.553Z level=WARN source=cpu_linux.go:130 msg="failed to parse CPU allowed micro secs" error="strconv.ParseInt: parsing \"max\": invalid syntax"
+ollama-1  | time=2026-05-31T11:19:42.568Z level=WARN source=server.go:169 msg="requested context size too large for model" num_ctx=8192 n_ctx_train=2048
+ollama-1  | time=2026-05-31T11:19:42.568Z level=INFO source=server.go:433 msg="starting runner" cmd="/usr/bin/ollama runner --ollama-engine --model /root/.ollama/models/blobs/sha256-970aa74c0a90ef7482477cf803618e776e173c007bf957f635f1015bfcfef0e6 --port 36939"
+ollama-1  | time=2026-05-31T11:19:42.569Z level=INFO source=sched.go:484 msg="system memory" total="15.2 GiB" free="14.9 GiB" free_swap="4.0 GiB"
+ollama-1  | time=2026-05-31T11:19:42.569Z level=INFO source=server.go:792 msg="loading model" "model layers"=13 requested=-1
+ollama-1  | time=2026-05-31T11:19:42.596Z level=INFO source=runner.go:1450 msg="starting ollama engine"
+ollama-1  | time=2026-05-31T11:19:42.601Z level=INFO source=runner.go:1485 msg="Server listening on 127.0.0.1:36939"
+ollama-1  | time=2026-05-31T11:19:42.603Z level=INFO source=runner.go:1297 msg=load request="{Operation:fit LoraPath:[] Parallel:1 BatchSize:512 FlashAttention:Disabled KvSize:2048 KvCacheType: NumThreads:8 GPULayers:[] MultiUserCache:false ProjectorPath: MainGPU:0 UseMmap:false}"
+ollama-1  | time=2026-05-31T11:19:42.612Z level=INFO source=ggml.go:144 msg="" architecture=nomic-bert file_type=F16 name=nomic-embed-text-v1.5 description="" num_tensors=112 num_key_values=25
+ollama-1  | load_backend: loaded CPU backend from /usr/lib/ollama/libggml-cpu-haswell.so
+ollama-1  | time=2026-05-31T11:19:42.619Z level=INFO source=ggml.go:104 msg=system CPU.0.SSE3=1 CPU.0.SSSE3=1 CPU.0.AVX=1 CPU.0.AVX2=1 CPU.0.F16C=1 CPU.0.FMA=1 CPU.0.BMI2=1 CPU.0.LLAMAFILE=1 CPU.1.LLAMAFILE=1 compiler=cgo(gcc)
+ollama-1  | time=2026-05-31T11:19:42.621Z level=WARN source=runner.go:1226 msg="model does not support caching, setting batch size to context length" batch_size=2048
+ollama-1  | time=2026-05-31T11:19:42.624Z level=INFO source=runner.go:1297 msg=load request="{Operation:alloc LoraPath:[] Parallel:1 BatchSize:512 FlashAttention:Disabled KvSize:2048 KvCacheType: NumThreads:8 GPULayers:[] MultiUserCache:false ProjectorPath: MainGPU:0 UseMmap:false}"
+ollama-1  | time=2026-05-31T11:19:42.635Z level=WARN source=runner.go:1226 msg="model does not support caching, setting batch size to context length" batch_size=2048
+ollama-1  | time=2026-05-31T11:19:42.637Z level=INFO source=runner.go:1297 msg=load request="{Operation:commit LoraPath:[] Parallel:1 BatchSize:512 FlashAttention:Disabled KvSize:2048 KvCacheType: NumThreads:8 GPULayers:[] MultiUserCache:false ProjectorPath: MainGPU:0 UseMmap:false}"
+ollama-1  | time=2026-05-31T11:19:42.638Z level=INFO source=ggml.go:490 msg="offloading 0 repeating layers to GPU"
+ollama-1  | time=2026-05-31T11:19:42.638Z level=INFO source=ggml.go:494 msg="offloading output layer to CPU"
+ollama-1  | time=2026-05-31T11:19:42.638Z level=INFO source=ggml.go:502 msg="offloaded 0/13 layers to GPU"
+ollama-1  | time=2026-05-31T11:19:42.638Z level=INFO source=device.go:245 msg="model weights" device=CPU size="305.6 MiB"
+ollama-1  | time=2026-05-31T11:19:42.638Z level=INFO source=device.go:267 msg="compute graph" device=CPU size="234.0 MiB"
+ollama-1  | time=2026-05-31T11:19:42.638Z level=INFO source=device.go:272 msg="total memory" size="539.6 MiB"
+ollama-1  | time=2026-05-31T11:19:42.638Z level=INFO source=sched.go:561 msg="loaded runners" count=1
+ollama-1  | time=2026-05-31T11:19:42.638Z level=INFO source=server.go:1385 msg="waiting for llama runner to start responding"
+ollama-1  | time=2026-05-31T11:19:42.639Z level=INFO source=server.go:1428 msg="waiting for server to become available" status="llm server loading model"
+ollama-1  | time=2026-05-31T11:19:43.392Z level=INFO source=server.go:1432 msg="llama runner started in 0.82 seconds"
+ollama-1  | [GIN] 2026/05/31 - 11:19:45 | 200 |  2.794402771s |      172.19.0.7 | POST     "/v1/embeddings"
+app-1     | INFO:     Application startup complete.
+app-1     | INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+app-1     | INFO:     127.0.0.1:60766 - "GET /health HTTP/1.1" 200 OK
+ollama-1  | [GIN] 2026/05/31 - 11:19:51 | 200 |      27.975µs |       127.0.0.1 | HEAD     "/"
+ollama-1  | [GIN] 2026/05/31 - 11:19:51 | 200 |     388.046µs |       127.0.0.1 | GET      "/api/tags"
+app-1     | INFO:     127.0.0.1:48034 - "GET /health HTTP/1.1" 200 OK
+ollama-1  | [GIN] 2026/05/31 - 11:20:01 | 200 |       31.13µs |       127.0.0.1 | HEAD     "/"
+ollama-1  | [GIN] 2026/05/31 - 11:20:01 | 200 |     257.982µs |       127.0.0.1 | GET      "/api/tags"
+app-1     | INFO:     127.0.0.1:44108 - "GET /health HTTP/1.1" 200 OK
+ollama-1  | [GIN] 2026/05/31 - 11:20:11 | 200 |      53.504µs |       127.0.0.1 | HEAD     "/"
+ollama-1  | [GIN] 2026/05/31 - 11:20:11 | 200 |     332.658µs |       127.0.0.1 | GET      "/api/tags"
+app-1     | INFO:     127.0.0.1:53274 - "GET /health HTTP/1.1" 200 OK
+ollama-1  | [GIN] 2026/05/31 - 11:20:22 | 200 |      35.138µs |       127.0.0.1 | HEAD     "/"
+ollama-1  | [GIN] 2026/05/31 - 11:20:22 | 200 |     353.409µs |       127.0.0.1 | GET      "/api/tags"
+app-1     | INFO:     127.0.0.1:33668 - "GET /health HTTP/1.1" 200 OK
+ollama-1  | [GIN] 2026/05/31 - 11:20:32 | 200 |       36.01µs |       127.0.0.1 | HEAD     "/"
+ollama-1  | [GIN] 2026/05/31 - 11:20:32 | 200 |     309.093µs |       127.0.0.1 | GET      "/api/tags"
+app-1     | INFO:     127.0.0.1:58732 - "GET /health HTTP/1.1" 200 OK
+ollama-1  | [GIN] 2026/05/31 - 11:20:42 | 200 |      27.613µs |       127.0.0.1 | HEAD     "/"
+ollama-1  | [GIN] 2026/05/31 - 11:20:42 | 200 |     342.567µs |       127.0.0.1 | GET      "/api/tags"
+app-1     | INFO:     127.0.0.1:54514 - "GET /health HTTP/1.1" 200 OK
+ollama-1  | [GIN] 2026/05/31 - 11:20:52 | 200 |      41.751µs |       127.0.0.1 | HEAD     "/"
+ollama-1  | [GIN] 2026/05/31 - 11:20:52 | 200 |     499.784µs |       127.0.0.1 | GET      "/api/tags"
+app-1     | INFO:     127.0.0.1:50050 - "GET /health HTTP/1.1" 200 OK
+ollama-1  | [GIN] 2026/05/31 - 11:21:02 | 200 |       25.59µs |       127.0.0.1 | HEAD     "/"
+ollama-1  | [GIN] 2026/05/31 - 11:21:02 | 200 |     387.143µs |       127.0.0.1 | GET      "/api/tags"
+app-1     | INFO:     127.0.0.1:54302 - "GET /health HTTP/1.1" 200 OK
+ollama-1  | [GIN] 2026/05/31 - 11:21:12 | 200 |      34.718µs |       127.0.0.1 | HEAD     "/"
+ollama-1  | [GIN] 2026/05/31 - 11:21:12 | 200 |     283.964µs |       127.0.0.1 | GET      "/api/tags"
+app-1     | INFO:     127.0.0.1:53668 - "GET /health HTTP/1.1" 200 OK
+ollama-1  | [GIN] 2026/05/31 - 11:21:22 | 200 |      37.883µs |       127.0.0.1 | HEAD     "/"
+ollama-1  | [GIN] 2026/05/31 - 11:21:22 | 200 |     485.304µs |       127.0.0.1 | GET      "/api/tags"
+app-1     | INFO:     127.0.0.1:51628 - "GET /health HTTP/1.1" 200 OK
+ollama-1  | [GIN] 2026/05/31 - 11:21:32 | 200 |      31.541µs |       127.0.0.1 | HEAD     "/"
+ollama-1  | [GIN] 2026/05/31 - 11:21:32 | 200 |     341.113µs |       127.0.0.1 | GET      "/api/tags"
+app-1     | INFO:     127.0.0.1:57972 - "GET /health HTTP/1.1" 200 OK
+ollama-1  | [GIN] 2026/05/31 - 11:21:42 | 200 |      33.896µs |       127.0.0.1 | HEAD     "/"
+ollama-1  | [GIN] 2026/05/31 - 11:21:42 | 200 |     488.031µs |       127.0.0.1 | GET      "/api/tags"
+app-1     | INFO:     127.0.0.1:55698 - "GET /health HTTP/1.1" 200 OK
+ollama-1  | [GIN] 2026/05/31 - 11:21:53 | 200 |      24.197µs |       127.0.0.1 | HEAD     "/"
+ollama-1  | [GIN] 2026/05/31 - 11:21:53 | 200 |     253.294µs |       127.0.0.1 | GET      "/api/tags"
+app-1     | INFO:     127.0.0.1:37780 - "GET /health HTTP/1.1" 200 OK
+ollama-1  | [GIN] 2026/05/31 - 11:22:03 | 200 |      31.031µs |       127.0.0.1 | HEAD     "/"
+ollama-1  | [GIN] 2026/05/31 - 11:22:03 | 200 |     547.618µs |       127.0.0.1 | GET      "/api/tags"
+unexpected EOF
+unexpected EOF
+v View in Docker Desktop   o View Config   w Enable Watch   d Detach
+What's next:
+    Debug this Compose error with Gordon → docker ai "help me fix this compose error"
+PS I:\Python\AI_Engineering\home13\homework\boilerplate> docker compose -f docker-compose.ollama.yml restart app
+[+] restart 0/1
+ - Container boilerplate-app-1 Restarting                                                                           0.7s
+PS I:\Python\AI_Engineering\home13\homework\boilerplate>

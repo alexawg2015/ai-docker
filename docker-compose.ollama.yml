@@ -1,0 +1,82 @@
+# docker-compose.ollama.yml — БОНУС: локальний LLM через Ollama
+#
+# Запуск:   docker compose -f docker-compose.ollama.yml up --build
+# Моделі (одноразово після запуску):
+#   docker compose -f docker-compose.ollama.yml exec ollama ollama pull llama3.2:3b
+#   docker compose -f docker-compose.ollama.yml exec ollama ollama pull nomic-embed-text
+
+services:
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile        # той самий Dockerfile що і основний
+    ports:
+      - "8000:8000"
+    environment:
+      - OPENAI_API_KEY=not-needed   # Ollama не потребує ключа
+      - EMBEDDER_MODEL=nomic-embed-text
+      - LLM_MODEL=llama3.2:3b
+      - OLLAMA_BASE_URL=http://ollama:11434
+    depends_on:
+      ollama:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - ai-network
+
+  ollama:
+    image: ollama/ollama:latest
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_models:/root/.ollama
+    healthcheck:
+      test: ["CMD", "ollama", "list"]
+      interval: 10s
+      timeout: 10s
+      start_period: 30s
+      retries: 5
+    restart: unless-stopped
+    networks:
+      - ai-network
+
+  qdrant:
+    image: qdrant/qdrant:latest
+    ports:
+      - "6335:6333"        # 6335 бо 6333 зайнятий Docker Desktop
+    volumes:
+      - qdrant_data:/qdrant/storage
+    healthcheck:
+      test: ["CMD-SHELL", "bash -c 'echo > /dev/tcp/localhost/6333'"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+    networks:
+      - ai-network
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    restart: unless-stopped
+    networks:
+      - ai-network
+
+volumes:
+  ollama_models:
+  qdrant_data:
+  redis_data:
+
+networks:
+  ai-network:
+    driver: bridge
